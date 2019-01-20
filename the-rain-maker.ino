@@ -11,6 +11,8 @@ LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 const int stepsPerRevolution = 200; 
 Stepper stepper(stepsPerRevolution, 6, 7, 8, 9);
 
+const int limitRain = 50
+
 int speed = 60;
 volatile unsigned int rain = 0;
 volatile unsigned long lastInterruptTimeRain = 0;
@@ -106,6 +108,9 @@ void interruptRain() {
     rain++;
     printRain();
     lastInterruptTimeRain = interruptTimeRain;
+    if (limitRain == rain) {
+      setSpeed(0);
+    }
   }
 }
 
